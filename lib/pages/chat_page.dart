@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class ChatPage extends StatelessWidget {
   const ChatPage({super.key, required this.title});
-
+  
   final String title;
 
   @override
