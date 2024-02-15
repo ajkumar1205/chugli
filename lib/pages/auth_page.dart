@@ -1,12 +1,27 @@
 import 'package:flutter/material.dart';
 
-class AuthPage extends StatelessWidget {
+class AuthPage extends StatefulWidget {
   const AuthPage({super.key});
 
   @override
+  State<AuthPage> createState() => _AuthPageState();
+}
+
+class _AuthPageState extends State<AuthPage> {
+  late TextEditingController email;
+  late TextEditingController otp;
+  late double h;
+
+  @override
+  void initState() {
+    super.initState();
+    email = TextEditingController();
+    otp = TextEditingController();
+    h = 132;
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final email = TextEditingController();
-    final phone = TextEditingController();
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
@@ -21,8 +36,9 @@ class AuthPage extends StatelessWidget {
           ),
         ),
         child: Center(
-          child: Container(
-            height: 172,
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 200),
+            height: h + 40,
             width: 308,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(25),
@@ -46,8 +62,9 @@ class AuthPage extends StatelessWidget {
                     ),
                   ),
                 )),
-                Container(
-                  height: 132,
+                AnimatedContainer(
+                  duration: const Duration(milliseconds: 200),
+                  height: h,
                   width: 300,
                   padding: const EdgeInsets.all(10),
                   decoration: BoxDecoration(
@@ -62,21 +79,19 @@ class AuthPage extends StatelessWidget {
                         style: const TextStyle(fontSize: 20),
                         keyboardType: TextInputType.emailAddress,
                         decoration: const InputDecoration(
-                            hintText: "example@mail.com",
-                            hintStyle: TextStyle(
-                              fontWeight: FontWeight.normal,
-                            )),
+                          hintText: "example@mail.com",
+                          hintStyle: TextStyle(
+                            fontWeight: FontWeight.normal,
+                          ),
+                        ),
                       ),
-                      // TextField(
-                      //   controller: phone,
-                      //   keyboardType: TextInputType.phone,
-                      //   decoration: const InputDecoration(
-                      //       hintText: "9876543210",
-                      //       constraints: BoxConstraints(maxWidth: 300)),
-                      // ),
                       const SizedBox(height: 10),
                       TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          setState(() {
+                            h = h + 54;
+                          });
+                        },
                         style: ButtonStyle(
                           backgroundColor: MaterialStatePropertyAll(
                               Theme.of(context).primaryColor),
@@ -88,10 +103,26 @@ class AuthPage extends StatelessWidget {
                         ),
                         child: const Text("Send OTP"),
                       ),
+                      if (h != 132)
+                        AnimatedContainer(
+                          duration: const Duration(milliseconds: 200),
+                          height: 0,
+                          child: TextField(
+                            controller: otp,
+                            style: const TextStyle(fontSize: 20),
+                            keyboardType: TextInputType.number,
+                            decoration: const InputDecoration(
+                              hintText: "Enter the OTP",
+                              hintStyle: TextStyle(
+                                fontWeight: FontWeight.normal,
+                              ),
+                            ),
+                          ),
+                        )
                     ],
                   ),
                 ),
-                const SizedBox(height: 4)
+                const SizedBox(height: 4),
               ],
             ),
           ),
