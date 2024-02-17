@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import './pages/home_page.dart';
 import './pages/auth_page.dart';
+import './pages/profileBuild_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
       routes: {
         "/home": (context) => const HomePage(),
         "/": (context) => const AuthPage(),
+        "/profileBuild": (context) => const ProfileBuildPage()
       },
     );
   }
